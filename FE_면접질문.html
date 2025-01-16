@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>FE 기술면접 질문서</title>
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+        
+        .container {
+            background: transparent;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #111827;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .question-card {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            font-size: 1rem;
+            color: #6b7280;
+            margin: 0 0 1.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .meta-info {
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-direction: column;
+        }
+
+        .evaluation-item, .goal {
+            color: #4b5563;
+            font-size: 0.875rem;
+            background: #f3f4f6;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .evaluation-item::before, .goal::before {
+            content: '';
+            display: inline-block;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .evaluation-item::before {
+            background: #4f46e5;
+        }
+
+        .goal::before {
+            background: #10b981;
+        }
+
+        .evaluation-item strong, .goal strong {
+            color: #374151;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .question {
+            color: #111827;
+            font-size: 1.25rem;
+            margin: 2rem 0;
+            padding: 1.5rem 2rem;
+            background: #f9fafb;
+            border-radius: 12px;
+            line-height: 1.7;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+        }
+
+        .keywords {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .keywords ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .keywords li {
+            margin: 0;
+            padding: 0.5rem 1rem;
+            background: #eef2ff;
+            color: #4f46e5;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .memo-area {
+            margin-top: 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .memo-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1.25rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.7;
+            resize: none;
+            overflow-y: hidden;
+            background: #f9fafb;
+            color: #1f2937;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            display: block;
+        }
+
+        .memo-textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .memo-textarea:hover {
+            border-color: #d1d5db;
+            background: #ffffff;
+        }
+
+        .memo-textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            background: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.1), 
+                        0 2px 4px -1px rgba(79, 70, 229, 0.06);
+        }
+
+        .save-status {
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .save-status .status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .save-status .time {
+            color: #9ca3af;
+            font-weight: 400;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+                padding: 1.25rem;
+            }
+
+            .question-card {
+                padding: 1.5rem;
+            }
+
+            .meta-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .memo-textarea {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FE 기술면접 질문서</h1>
+        <div id="questions-container"></div>
+    </div>
+
+    <script>
+        // 질문 데이터
+        const questions = [
+            {
+                number: 1,
+                evaluation: "경력 및 기술 스택 탐색",
+                goal: "지원자의 업무 선호도와 주요 성과 이해",
+                question: "지금까지 진행했던 프로젝트 중 가장 도전적이었던 프로젝트가 무엇이었고, 그 도전 요소는 무엇이었는지 말씀해 주세요.",
+                keywords: ["인공위성 영상 분석", "AI 모델 실시간 시각화", "대규모 이미지 처리"]
+            },
+            {
+                number: 2,
+                evaluation: "기술 이해도 및 적용 능력",
+                goal: "React와 Vue에 대한 실무 경험 비교를 통해 기술적 깊이 확인",
+                question: "React와 Vue 각각을 활용해 보셨다고 했는데, 두 프레임워크의 장단점을 실무 관점에서 비교해 주시겠습니까?",
+                keywords: ["React / Vue 프레임워크 비교 (자유도, 구조 설계, 확장성)"]
+            },
+            {
+                number: 3,
+                evaluation: "문제 해결 능력 및 대규모 서비스 구조 설계 역량",
+                goal: "대규모 데이터 라벨링 플랫폼 구조 설계 시의 핵심 고려사항 파악",
+                question: "대규모 데이터 라벨링 플랫폼의 프론트엔드 구조를 설계할 때 어떤 점을 고려해야 한다고 보시나요?",
+                keywords: [
+                    "대용량 데이터 처리 (서버사이드 페이징, 모듈화, Code Splitting, Webpack 최적화)",
+                    "MLOps 플랫폼 및 라벨링 프로세스 고도화"
+                ]
+            },
+            {
+                number: 4,
+                evaluation: "기술적 문제 해결 능력 및 프로젝트 고도화 경험",
+                goal: "복잡한 기술 영역을 어떻게 접근하고 해결했는지 구체적으로 파악",
+                question: "SIA에서 진행한 인공위성 데이터 분석 프로젝트에서 기술적으로 가장 어려웠던 부분은 무엇이었으며, 이를 어떻게 해결하셨나요?",
+                keywords: [
+                    "인공위성 영상 분석",
+                    "AI 모델 실시간 시각화",
+                    "대규모 이미지 처리",
+                    "WebGL 기반 렌더링 성능 개선"
+                ]
+            },
+            {
+                number: 5,
+                evaluation: "상태 관리 설계 능력",
+                goal: "대규모 애플리케이션의 전역 상태 관리와 API 연동 방식을 확인",
+                question: "Rest API 기반의 웹 애플리케이션에서 상태 관리(State Management)를 효율적으로 구성하기 위해 어떤 접근 방식을 사용하시는지 구체적인 예시를 들어 설명해 주세요.",
+                keywords: ["상태 관리 (Redux, Vuex, Thunk/RTK, API 캐싱, 스냅샷 테스팅)"]
+            },
+            {
+                number: 6,
+                evaluation: "DevOps 및 자동화 프로세스 이해",
+                goal: "CI/CD 파이프라인에 대한 전체적인 관점과 노하우 파악",
+                question: "CI/CD 파이프라인을 구축할 때, 개발/테스트/배포 단계에서 각각 중요한 고려사항이 무엇이라고 생각하시나요?",
+                keywords: ["CI/CD 자동 테스트 구축 (코드 스타일 검증, E2E 테스트, 롤백 전략)"]
+            },
+            {
+                number: 7,
+                evaluation: "리더십 및 조직 기여 가능성",
+                goal: "주니어 개발자 양성 및 팀 빌딩 역량을 평가",
+                question: "주니어 개발자를 멘토링할 때 가장 중요하게 생각하는 가치나 원칙이 있다면 무엇인지, 그리고 실제로 어떻게 실천해 왔는지 말씀해 주세요.",
+                keywords: ["주니어 개발자 멘토링"]
+            },
+            {
+                number: 8,
+                evaluation: "협업 능력 및 문제 해결 능력",
+                goal: "타 직군과 충돌 상황에서의 커뮤니케이션과 중재 경험 평가",
+                question: "협업 과정에서 발생했던 대표적인 충돌(디자인, 백엔드 API 스펙 등)에 대해 어떻게 중재하고 해결한 경험이 있으신지 구체적인 사례를 들어 주실 수 있을까요?",
+                keywords: ["협업 충돌 해결 (요구사항 문서화, 우선순위 조정, 프로토타입 활용)"]
+            },
+            {
+                number: 9,
+                evaluation: "레거시 코드 분석 및 개선 역량",
+                goal: "코드 마이그레이션 과정에서의 단계적 접근과 위험 관리 능력 확인",
+                question: "레거시 코드를 최신 프론트엔드 스택으로 전환하거나, 라이브러리 버전을 크게 업그레이드해야 할 때 어떤 절차와 기준을 가지고 진행하시나요?",
+                keywords: ["레거시 코드 전환 (테스트 커버리지, Breaking Change 문서화, Pilot 프로젝트, 점진적 적용)"]
+            },
+            {
+                number: 10,
+                evaluation: "회사와의 적합성 및 장기적 비전",
+                goal: "데이터메이커에서 이루고 싶은 목표와 구체적인 실행 계획 확인",
+                question: "데이터메이커에서 프론트엔드 시니어로 일하게 된다면, 어떤 가치를 만들어내고 싶고, 그 목표를 어떻게 달성할 계획인지 말씀해 주세요.",
+                keywords: ["MLOps 플랫폼 및 라벨링 프로세스 고도화 (성능 최적화, 사용자 편의성, 조직 개발 역량 강화)"]
+            }
+        ];
+
+        // 날짜 포맷팅 함수
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const seconds = date.getSeconds().toString().padStart(2, '0');
+            
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+
+        // 질문 카드 HTML 템플릿 함수
+        function createQuestionCard(question) {
+            const savedMemo = localStorage.getItem(`memo_${question.number}`);
+            const savedTime = localStorage.getItem(`memo_time_${question.number}`);
+            let timeStr = '';
+            
+            if (savedTime) {
+                const savedDate = new Date(savedTime);
+                timeStr = formatDate(savedDate);
+            }
+
+            return `
+                <div class="question-card">
+                    <h2>Question ${question.number}</h2>
+                    <div class="meta-info">
+                        <div class="evaluation-item">
+                            <strong>평가항목</strong> ${question.evaluation}
+                        </div>
+                        <div class="goal">
+                            <strong>목표</strong> ${question.goal}
+                        </div>
+                    </div>
+                    <div class="question">${question.question}</div>
+                    <div class="keywords">
+                        <ul>
+                            ${question.keywords.map(keyword => `<li>${keyword}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="memo-area">
+                        <textarea 
+                            class="memo-textarea" 
+                            placeholder="이 질문에 대한 메모를 입력하세요..."
+                            data-question="${question.number}"
+                        >${savedMemo || ''}</textarea>
+                        <div class="save-status" id="save-status-${question.number}">
+                            ${savedTime ? `<div class="time">마지막 저장: ${timeStr}</div>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 메모 저장 함수
+        function saveMemo(textarea) {
+            const questionNumber = textarea.dataset.question;
+            const statusElement = document.getElementById(`save-status-${questionNumber}`);
+            const now = new Date();
+            const timeStr = formatDate(now);
+            
+            localStorage.setItem(`memo_${questionNumber}`, textarea.value);
+            localStorage.setItem(`memo_time_${questionNumber}`, now.toISOString());
+            
+            statusElement.innerHTML = `
+                <div class="status">저장됨</div>
+                <div class="time">마지막 저장: ${timeStr}</div>
+            `;
+
+            // 3초 후 "저장됨" 메시지 제거
+            setTimeout(() => {
+                const statusDiv = statusElement.querySelector('.status');
+                if (statusDiv) {
+                    statusDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        statusDiv.remove();
+                    }, 200);
+                }
+            }, 3000);
+        }
+
+        // textarea 높이 자동 조절 함수
+        function adjustTextareaHeight(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
+
+        // 자동 저장 기능
+        function setupAutoSave() {
+            let timeoutId;
+            const memoTextareas = document.querySelectorAll('.memo-textarea');
+            
+            memoTextareas.forEach(textarea => {
+                // 초기 높이 조절
+                adjustTextareaHeight(textarea);
+
+                // 입력 이벤트 핸들러
+                textarea.addEventListener('input', () => {
+                    const questionNumber = textarea.dataset.question;
+                    const statusElement = document.getElementById(`save-status-${questionNumber}`);
+                    
+                    // 높이 자동 조절
+                    adjustTextareaHeight(textarea);
+                    
+                    // 이전 타이머 취소
+                    clearTimeout(timeoutId);
+                    
+                    // 상태 표시 업데이트
+                    const existingTime = statusElement.querySelector('.time');
+                    statusElement.innerHTML = `
+                        <div class="status">입력 중...</div>
+                        ${existingTime ? existingTime.outerHTML : ''}
+                    `;
+                    
+                    // 30초 후 저장
+                    timeoutId = setTimeout(() => {
+                        saveMemo(textarea);
+                    }, 30000);
+                });
+
+                // blur 이벤트 핸들러 추가
+                textarea.addEventListener('blur', () => {
+                    clearTimeout(timeoutId); // 대기 중인 타이머 취소
+                    saveMemo(textarea);
+                });
+            });
+        }
+
+        // 질문 렌더링
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            const questionsHTML = questions.map(createQuestionCard).join('');
+            container.innerHTML = questionsHTML;
+            setupAutoSave();
+        }
+
+        // 페이지 로드 시 질문 렌더링
+        document.addEventListener('DOMContentLoaded', renderQuestions);
+    </script>
+</body>
+</html>
